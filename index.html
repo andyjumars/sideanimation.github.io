@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>側邊欄動畫效果</title>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color:red;
+            position:relative;
+            left:-200px;
+        }
+
+        #box span {
+            position:absolute;
+            width: 40px;
+            height: 60px;
+            color:#fff;
+            background-color:#000000;
+            right:-40px;
+            top:50%;
+            margin-top:-30px;
+            line-height:60px;
+            text-align:center;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span>拉開</span>
+
+    </div>
+    <script type="text/javascript">
+
+
+        window.onload = function(){
+            var box = document.getElementById('box');
+            var timer = null,speed = 0;
+            box.onmouseover = function(){
+                startAnimation(this,0);
+
+            }
+
+            box.onmouseout = function(){
+                startAnimation(this,-200);
+            }
+
+            //封裝代碼
+            function startAnimation(obj,end){
+                   //先關閉定時器
+                   clearInterval(timer);
+                    speed = end > obj.offsetLeft ? 5 : -5;
+                    timer = setInterval(function(){
+                        if(obj.offsetLeft === end){
+                            clearInterval(timer);
+                            return;
+                        }
+                        obj.style.left = obj.offsetLeft + speed +'px';
+                    },30);
+            }
+            
+        }
+    
+    </script>
+</body>
+</html>
